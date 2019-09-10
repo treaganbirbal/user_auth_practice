@@ -1,19 +1,21 @@
 import React from 'react';
+import SignUp from './SignUp'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      First Name:<input type="text" className='first-name' value=''/>
-      <br/>
-      Last Name:<input type="text" className='last-name' value=''/>
-      <br/>
-      Email:<input type="email"/>
-      <br/>
-      Password:<input type="password" value='' className="password"/>
-
-    </div>
-  );
+class App extends React.Component{
+  constructor(){
+    super();
+    this.state ={
+      
+    }
+  }
+  render(){
+    return(
+      <div className='App'>
+        <SignUp />
+      </div>
+    )
+  }
 }
 
 export default App;
