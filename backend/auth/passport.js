@@ -1,12 +1,13 @@
 const passport = require('passport');
-const db = require('../db/index.js');
+const db = require('../db/index.js').default;
 
 module.exports = () => {
   passport.serializeUser((user, done) => {
     done(null, {
       id: user.id,
       email: user.email,
-      name: user.name
+      firstname: user.firstname,
+      lastname: user.lastname
   });
 })
 
@@ -18,7 +19,8 @@ module.exports = () => {
     done(null, {
       id: user.id,
       email: user.email,
-      name: user.name
+      firstname: user.firstname,
+      lastname: user.lastname
     })
   })
   .catch(err => {

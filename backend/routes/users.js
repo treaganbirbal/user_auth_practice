@@ -7,7 +7,7 @@ const {getAllUsers, getSingleUser, updateUser, createUser, deleteUser, isLoggedI
 
 
 router.get('/', getAllUsers);
-router.get('/getUser/:id', getSingleUser);
+router.get('/user/:id', getSingleUser);
 router.post('/login', passport.authenticate("local", {}), loginUser);
 router.get('/isLoggedIn', isLoggedIn);
 router.get('/logout', loginRequire, logoutUser);

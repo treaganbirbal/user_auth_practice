@@ -1,4 +1,5 @@
-// const db = require ('../db/index.js')
+const pgp = require('pg-promise')({})
+const db = pgp('postgres://localhost:5432/test')
 
 const authHelper = require('../../auth/helpers.js')
 
@@ -35,9 +36,10 @@ const getSingleUser = (req, res, next) => {
 
 const updateUser = (req, res, next) => {
     let userId = Number(req.params.id)
-  db.none('UPDATE users SET name=${name}, email=${email} WHERE id=${userId}', {
+  db.none('UPDATE users SET firstname=${firstname}, lastname=${lastname} email=${email} WHERE id=${userId}', {
     id: req.params.id,
-    name: req.body.name,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email
     })
     .then(() => {
@@ -55,8 +57,8 @@ const updateUser = (req, res, next) => {
 const createUser = (req, res, next) => {
   const hash = authHelper.createHash(req.body.password_digest);
 
-  db.none('INSERT INTO users(name, email, password_digest) VALUES(${name}, ${email}, ${password_digest})',
-  { name: req.body.name, email: req.body.email, password_digest: hash}
+  db.none('INSERT INTO users(firstname, lastname, email, password_digest) VALUES(${firstname}, ${lastname}, ${email}, ${password_digest})',
+  { firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email, password_digest: hash}
   )
     .then(() => {
       res.status(200)
