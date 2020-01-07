@@ -10,7 +10,7 @@ router.get('/', getAllUsers);
 router.get('/user/:id', getSingleUser);
 router.post('/login', passport.authenticate("local", {}), loginUser);
 router.get('/isLoggedIn', isLoggedIn);
-router.get('/logout', loginRequire, logoutUser);
+router.post('/logout', loginRequire, logoutUser);
 router.patch('/:id', updateUser);
 router.post('/register', createUser);
 router.delete('/:id', deleteUser);
