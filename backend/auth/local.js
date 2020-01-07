@@ -3,7 +3,7 @@ const LocatStrategy = require('passport-local').Strategy;
 const init = require('./passport')
 const helpers = require('./helpers')
 
-const db = require('../db/index.js/index.js.js').default.default;
+const db = require('../db/index.js').default;
 
 init();
 
