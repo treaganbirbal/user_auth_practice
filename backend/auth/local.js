@@ -3,13 +3,13 @@ const LocatStrategy = require('passport-local').Strategy;
 const init = require('./passport')
 const helpers = require('./helpers')
 
-const db = require('../db/index.js').default;
+const db = require('../db/index.js');
 
 init();
 
 passport.use(
   new LocatStrategy({usernameField: 'email'}, (email, password, done) => {
-    db.one("SELECT * FROM users WHERE email = ${email}", {
+    db.one(`SELECT * FROM users WHERE email = ${email}`, {
       email: email
     })
     .then(user => {
