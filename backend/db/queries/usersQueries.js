@@ -1,7 +1,7 @@
 const pgp = require('pg-promise')({})
 const db = pgp('postgres://localhost:5432/test')
 
-const authHelper = require('../../auth/helpers.js')
+const authHelpers = require('../../auth/helpers.js')
 
 const getAllUsers = (req, res, next) => {
   db.any("SELECT * FROM users")
@@ -36,7 +36,7 @@ const getSingleUser = (req, res, next) => {
 
 const updateUser = (req, res, next) => {
     let userId = Number(req.params.id)
-  db.none('UPDATE users SET firstname=${firstname}, lastname=${lastname} email=${email} WHERE id=${userId}', {
+  db.none('UPDATE users SET firstname=${firstname}, lastname=${lastname}, email=${email} WHERE id=${id}', {
     id: req.params.id,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
@@ -55,7 +55,7 @@ const updateUser = (req, res, next) => {
 }
 
 const createUser = (req, res, next) => {
-  const hash = authHelper.createHash(req.body.password_digest);
+  const hash = authHelpers.createHash(req.body.password_digest);
 
   db.none('INSERT INTO users(firstname, lastname, email, password_digest) VALUES(${firstname}, ${lastname}, ${email}, ${password_digest})',
   { firstname: req.body.firstname, lastname: req.body.lastname, email: req.body.email, password_digest: hash}
@@ -93,7 +93,7 @@ const logoutUser = (req, res, next) => {
   }
 
 const loginUser = (req, res) => {
-  res.json({user: req.user})
+  res.json(req.user)
 };
 
 const isLoggedIn = (req, res) => {
